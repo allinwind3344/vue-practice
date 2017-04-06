@@ -1,6 +1,6 @@
-# takeout
+# vue-practice
 
-> A Vue.js project
+> A Vue.js 2.0 project with Vuex and Rxjs
 
 ## Build Setup
 
@@ -16,6 +16,9 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+# serve for production at localhost:9000
+npm run prod
 
 # run unit tests
 npm run unit
