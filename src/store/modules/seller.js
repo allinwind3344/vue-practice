@@ -6,7 +6,8 @@ import * as types from '../mutation-types';
 import Vue from 'vue';
 import Rx from 'rxjs';
 
-const _OK = 0;
+// const _OK = 0;
+const url = 'http://localhost:3000';
 
 const state = {
   seller: {}
@@ -25,11 +26,11 @@ const mutations = {
 
 const actions = {
   initSeller({commit}, id) {
-    return Rx.Observable.fromPromise(Vue.http.get('/api/seller?id=' + id))
+    return Rx.Observable.fromPromise(Vue.http.get(url + '/api/seller/' + '59463a9ffb63b1062cb65652'))
       .map(res => {
         res = res.body;
-        if (res.errno === _OK) {
-          commit(types.INIT_SELLER, {seller: res.data, id});
+        if (!res.error) {
+          commit(types.INIT_SELLER, {seller: res, id});
         }
         return;
       }).toPromise();

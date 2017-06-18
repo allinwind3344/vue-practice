@@ -6,7 +6,8 @@ import * as types from '../mutation-types';
 import Vue from 'vue';
 import Rx from 'rxjs';
 
-const _OK = 0;
+// const _OK = 0;
+const url = 'http://localhost:3000';
 
 const state = {
   goods: []
@@ -29,6 +30,7 @@ const getters = {
 
 const mutations = {
   [types.INIT_GOODS](state, goods) {
+    console.log(goods);
     state.goods = goods;
   },
   [types.INCREASE_FOOD_COUNT](state, food) {
@@ -54,11 +56,11 @@ const mutations = {
 
 const actions = {
   initGoods({commit}) {
-    return Rx.Observable.fromPromise(Vue.http.get('/api/goods'))
+    return Rx.Observable.fromPromise(Vue.http.get(url + '/api/goods'))
       .map(res => {
         res = res.body;
-        if (res.errno === _OK) {
-          commit(types.INIT_GOODS, res.data);
+        if (!res.error) {
+          commit(types.INIT_GOODS, res);
         }
         return;
       }).toPromise();
